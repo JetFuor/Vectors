@@ -65,17 +65,38 @@ class StartScreen(Toplevel):
         self.configure(background="black")
 
         l = Label(self, text = "Vector Calculator") 
-        l.config(font =("Courier", 80), bg="black", fg="white", borderwidth="4", relief="groove", padx="20", pady="4")
+        l.config(font =("Courier", 80), bg="#6e2775", fg="white", borderwidth="4", relief="groove", padx="20", pady="4")
         l.pack(pady="80")
 
-        dimension2 = Button(self, text="2D Vector", height="3", width="15", command=lambda: [dimension2.pack_forget(), dimension3.pack_forget(), l.pack_forget(), Exit.pack_forget()])
-        dimension2.pack(pady="100")
+        dimension2 = Button(self, text="2D Vector", font=("Times", 20), command=lambda: self.switch_frame(D2Options))
+        dimension2.config(height="2",
+                            width="14",
+                            bg="black",
+                            fg="#97e6ca",
+                            relief="groove",
+                            borderwidth="4",
+                            activebackground="#00ff00")
+        dimension2.pack(pady="0")
 
-        dimension3 = Button(self, text="3D Vector", height="3", width="15", command=lambda: [dimension2.pack_forget(), dimension3.pack_forget(), l.pack_forget(), Exit.pack_forget()])
-        dimension3.pack(pady="20")
+        dimension3 = Button(self, text="3D Vector", font=("Times", 20), command=lambda: self.switch_frame(D3Options))
+        dimension3.config(height="2",
+                            width="14",
+                            bg="black",
+                            fg="#97e6ca",
+                            relief="groove",
+                            borderwidth="4",
+                            activebackground="#00ff00")
+        dimension3.pack(pady="80")
 
-        Exit = Button(self, text="Exit", height="3", width="15", command=lambda: [self.destroy()])
-        Exit.pack(pady="30")
+        Exit = Button(self, text="Exit", font=("Times", 20), command=lambda: [self.destroy()])
+        Exit.config(height="2",
+                        width="14",
+                        bg="black",
+                        fg="#97e6ca",
+                        relief="groove",
+                        borderwidth="4",
+                        activebackground="#00ff00")
+        Exit.pack(pady="0")
 
         self.attributes('-fullscreen', True)  
         self.fullScreenState = False
@@ -92,19 +113,194 @@ class StartScreen(Toplevel):
         self.fullScreenState = False
         self.attributes("-fullscreen", self.fullScreenState)
 
+    def switch_frame(self, frame_class):
+        new_frame = frame_class(self)
+        self._frame = new_frame
+        self._frame.pack()
 
 class D2Options(Toplevel):
 
     def __init__(self, parent):
         Toplevel.__init__(self, parent)
 
-        l = Label(self, text = "GBVebenjerbae") 
+        self.configure(background="black")
+
+        l = Label(self, text = "2D Vector Options") 
         l.config(font =("Courier", 80), bg="black", fg="white", borderwidth="4", relief="groove", padx="20", pady="4")
         l.pack(pady="80")
 
+        magnitude = Button(self, text="Magnitude", font=("Times", 20), command=lambda: self.switch_frame(Mag2D))
+        magnitude.config(height="2",
+                            width="14",
+                            bg="black",
+                            fg="#97e6ca",
+                            relief="groove",
+                            borderwidth="4",
+                            activebackground="#00ff00")
+        magnitude.pack(pady="0")
+
+        linequ = Button(self, text="Equation of Line", font=("Times", 20), command=lambda: self.switch_frame(Line2D))
+        linequ.config(height="2",
+                            width="14",
+                            bg="black",
+                            fg="#97e6ca",
+                            relief="groove",
+                            borderwidth="4",
+                            activebackground="#00ff00")
+        linequ.pack(pady="80")
+
+        Exit = Button(self, text="Back", font=("Times", 20), command=lambda: [self.destroy()])
+        Exit.config(height="2",
+                        width="14",
+                        bg="black",
+                        fg="#97e6ca",
+                        relief="groove",
+                        borderwidth="4",
+                        activebackground="#00ff00")
+        Exit.pack(pady="0")
+
+        self.attributes('-fullscreen', True)  
+        self.fullScreenState = False
+        self.bind("<F11>", self.toggleFullScreen)
+        self.bind("<Escape>", self.quitFullScreen)
+
         self.update()
 
+    def toggleFullScreen(self, event):
+        self.fullScreenState = not self.fullScreenState
+        self.attributes("-fullscreen", self.fullScreenState)
 
+    def quitFullScreen(self, event):
+        self.fullScreenState = False
+        self.attributes("-fullscreen", self.fullScreenState)
+
+    def switch_frame(self, frame_class):
+        new_frame = frame_class(self)
+        self._frame = new_frame
+        self._frame.pack()
+
+class D3Options(Toplevel):
+
+    def __init__(self, parent):
+        Toplevel.__init__(self, parent)
+
+        self.configure(background="black")
+
+        l = Label(self, text = "3D Vector Options") 
+        l.config(font =("Courier", 80), bg="black", fg="white", borderwidth="4", relief="groove", padx="20", pady="4")
+        l.pack(pady="80")
+
+        Exit = Button(self, text="Back", font=("Times", 20), command=lambda: [self.destroy()])
+        Exit.config(height="2",
+                        width="14",
+                        bg="black",
+                        fg="#97e6ca",
+                        relief="groove",
+                        borderwidth="4",
+                        activebackground="#00ff00")
+        Exit.pack(pady="0")
+
+        self.attributes('-fullscreen', True)  
+        self.fullScreenState = False
+        self.bind("<F11>", self.toggleFullScreen)
+        self.bind("<Escape>", self.quitFullScreen)
+
+        self.update()
+
+    def toggleFullScreen(self, event):
+        self.fullScreenState = not self.fullScreenState
+        self.attributes("-fullscreen", self.fullScreenState)
+
+    def quitFullScreen(self, event):
+        self.fullScreenState = False
+        self.attributes("-fullscreen", self.fullScreenState)
+
+    def switch_frame(self, frame_class):
+        new_frame = frame_class(self)
+        self._frame = new_frame
+        self._frame.pack()
+
+class Mag2D(Toplevel):
+
+    def __init__(self, parent):
+        Toplevel.__init__(self, parent)
+
+        self.configure(background="black")
+
+        l = Label(self, text = "Magnitude of 2D") 
+        l.config(font =("Courier", 80), bg="black", fg="white", borderwidth="4", relief="groove", padx="20", pady="4")
+        l.pack(pady="80")
+
+        Exit = Button(self, text="Back", font=("Times", 20), command=lambda: [self.destroy()])
+        Exit.config(height="2",
+                        width="14",
+                        bg="black",
+                        fg="#97e6ca",
+                        relief="groove",
+                        borderwidth="4",
+                        activebackground="#00ff00")
+        Exit.pack(pady="0")
+
+        self.attributes('-fullscreen', True)  
+        self.fullScreenState = False
+        self.bind("<F11>", self.toggleFullScreen)
+        self.bind("<Escape>", self.quitFullScreen)
+
+        self.update()
+
+    def toggleFullScreen(self, event):
+        self.fullScreenState = not self.fullScreenState
+        self.attributes("-fullscreen", self.fullScreenState)
+
+    def quitFullScreen(self, event):
+        self.fullScreenState = False
+        self.attributes("-fullscreen", self.fullScreenState)
+
+    def switch_frame(self, frame_class):
+        new_frame = frame_class(self)
+        self._frame = new_frame
+        self._frame.pack()
+
+class Line2D(Toplevel):
+
+    def __init__(self, parent):
+        Toplevel.__init__(self, parent)
+
+        self.configure(background="black")
+
+        l = Label(self, text = "Line 2D Equation")
+        l.config(font =("Courier", 80), bg="black", fg="white", borderwidth="4", relief="groove", padx="20", pady="4")
+        l.pack(pady="80")
+
+        Exit = Button(self, text="Back", font=("Times", 20), command=lambda: [self.destroy()])
+        Exit.config(height="2",
+                        width="14",
+                        bg="black",
+                        fg="#97e6ca",
+                        relief="groove",
+                        borderwidth="4",
+                        activebackground="#00ff00")
+        Exit.pack(pady="0")
+
+        self.attributes('-fullscreen', True)  
+        self.fullScreenState = False
+        self.bind("<F11>", self.toggleFullScreen)
+        self.bind("<Escape>", self.quitFullScreen)
+
+        self.update()
+
+    def toggleFullScreen(self, event):
+        self.fullScreenState = not self.fullScreenState
+        self.attributes("-fullscreen", self.fullScreenState)
+
+    def quitFullScreen(self, event):
+        self.fullScreenState = False
+        self.attributes("-fullscreen", self.fullScreenState)
+
+    def switch_frame(self, frame_class):
+        new_frame = frame_class(self)
+        self._frame = new_frame
+        self._frame.pack()
 
 if __name__ == "__main__":
     # Setting up the window
